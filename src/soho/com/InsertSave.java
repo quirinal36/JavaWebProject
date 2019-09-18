@@ -15,7 +15,7 @@ import org.json.JSONObject;
  */
 @WebServlet("/insert/save")
 public class InsertSave extends HttpServlet {
-	final static String FILENAME = "users.txt";
+	public final static String FILENAME = "users.txt";
 	
 	private static final long serialVersionUID = 1L;
        
@@ -31,6 +31,10 @@ public class InsertSave extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
@@ -62,7 +66,8 @@ public class InsertSave extends HttpServlet {
 			fileControl.writeFile(FILENAME, json.toString());
 		}
 		
-		
+		response.getWriter().append("입력에 성공했습니다.<br>");
+		response.getWriter().append("<a href='/list.jsp'>리스트보기</a>");
 	}
 
 }

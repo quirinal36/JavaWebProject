@@ -7,8 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class FileControl {
@@ -65,7 +68,19 @@ public class FileControl {
 		}
 		return result.toString();
 	}
-	
+	public List<User> getUsersFromString(String input){
+		List<User> result = new ArrayList<User>();
+		JSONObject obj = new JSONObject(input);
+		JSONArray array = obj.getJSONArray("list");
+		for(int i=0; i<array.length(); i++) {
+			User user = new User();
+			JSONObject item = array.getJSONObject(i);
+			user.setLogin(item.getString("login"));
+			user.setUsername(item.getString("username"));
+			result.add(user);
+		}
+		return result;
+	}
 	/**
 	 * 파일 생성 및 텍스트쓰기
 	 * 
