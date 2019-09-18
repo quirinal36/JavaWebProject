@@ -1,7 +1,11 @@
 package soho.com;
 
+import java.util.logging.Logger;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class User {
 	int id;
@@ -12,26 +16,6 @@ public class User {
 	String address;
 	String username;
 
-	public boolean signIn(User user) {
-		System.out.println("로그인 했습니다.");
-		return true;
-	}
-	
-	public boolean signOut(User user) {
-		System.out.println("로그아웃 했습니다.");
-		return true;
-	}
-	
-	public int signUp(User user) {
-		System.out.println("회원가입 했습니다.");
-		return 1;
-	}
-	
-	public int edit(User user) {
-		System.out.println(user.username + "님의 정보 변경 했습니다.");
-		return 1;
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -91,5 +75,52 @@ public class User {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+	}
+	
+	public static User parse(JSONObject input) {
+		User user = new User();
+		if(input.has("address")) {
+			try {
+				user.setAddress(input.getString("address"));
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		if(input.has("email")) {
+			try {
+				user.setEmail(input.getString("email"));
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		if(input.has("login")) {
+			try {
+				user.setLogin(input.getString("login"));
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		if(input.has("phone")) {
+			try {
+				user.setPhone(input.getString("phone"));
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		if(input.has("username")) {
+			try {
+				user.setUsername(input.getString("username"));
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		if(input.has("password")) {
+			try {
+				user.setPassword(input.getString("password"));
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
 	}
 }

@@ -1,12 +1,14 @@
+<%@page import="soho.com.UserControl"%>
 <%@page import="soho.com.User"%>
 <%@page import="soho.com.InsertSave"%>
 <%@page import="soho.com.FileControl"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%
-FileControl control = new FileControl();
-String json = control.readFile(InsertSave.FILENAME);
-List<User> list = control.getUsersFromString(json);
+FileControl fileControl = new FileControl();
+UserControl userControl = new UserControl();
+String json = fileControl.readFile(InsertSave.FILENAME);
+List<User> list = userControl.getUsersFromString(json);
 %>
 <html>
 <head>
@@ -37,7 +39,11 @@ List<User> list = control.getUsersFromString(json);
 			%>
 				<tr>	
 					<td><%=i+1 %></td>
-					<td><%=user.getLogin() %></td>
+					<td>
+						<a href="/view.jsp?id=<%=i %>">
+							<%=user.getLogin() %>
+						</a>
+					</td>
 					<td><%=user.getUsername() %></td>
 				</tr>
 			 <%}%>
