@@ -29,7 +29,6 @@ public class FileControl {
 	}
 	
 	/**
-	 * 파일 수정하기
 	 * 
 	 * @param title
 	 * @param content
