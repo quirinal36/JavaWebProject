@@ -1,7 +1,5 @@
 package soho.com;
 
-import java.util.logging.Logger;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.json.JSONException;
